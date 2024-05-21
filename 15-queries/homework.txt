@@ -33,17 +33,30 @@ HAVING total > 59000
 
 Задача 5
 
-SELECT productName, SUM(quantityordered * priceEach) AS pricetotal
-FROM 'orderdetails'
-INNER JOIN 'products'
-ON products.productCode = oderdetails.productCode
+SELECT productName, SUM(quantityordered * priceEach) AS total
+FROM orderdetails
+INNER JOIN products
+ON products.productCode =  orderdetails.productCode 
 GROUP BY productName
-ORDER BY pricetotal DESC
+ORDER BY total DESC
 LIMIT 10
 
 Задача 6
-#Вместо этой строки сюда писать запрос - ответ на задачу 6
 
+SELECT DISTINCT firstName, lastName, contactFirstName, contactLastName
+FROM employees
+LEFT JOIN customers
+ON customers.customerNumber = employees.employeeNumber
+UNION 
+SELECT DISTINCT firstName, lastName, contactFirstName,contactLastName
+FROM employees
+RIGHT JOIN customers
+ON customers.customerNumber = employees.employeeNumber
 
 Задача 7
-#Вместо этой строки сюда писать запрос - ответ на задачу 7
+
+SELECT t2.firstName AS firstName, t2.lastName AS lastName, t2.jobTitle AS jobTitle, 
+t1.FirstName AS subFirstName, t1.LastName AS subLastName
+FROM employees t1
+RIGHT JOIN employees t2
+ON t1.reportsTo = t2.employeeNumber
