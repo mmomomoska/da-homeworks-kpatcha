@@ -1,22 +1,45 @@
 Задача 1
-#Вместо этой строки сюда писать запрос - ответ на задачу 1
 
+SELECT orderNumber, productCode, (quantityordered * priceEach) AS maxprice
+FROM orderdetails
+ORDER BY maxprice DESC
+LIMIT 10
 
 Задача 2
-#Вместо этой строки сюда писать запрос - ответ на задачу 2
-
+SELECT orderNumber, SUM(quantityordered * priceEach) AS total
+FROM orderdetails
+GROUP BY orderNumber
+HAVING total > 59000
 
 Задача 3
-#Вместо этой строки сюда писать запрос - ответ на задачу 3
 
+SELECT orderdetails.orderNumber, orderDate, status, SUM(quantityordered * priceEach) AS total
+FROM orders
+INNER JOIN orderdetails
+ON orders.orderNumber = orderdetails.orderNumber
+GROUP BY orderNumber
+HAVING total > 59000
 
 Задача 4
-#Вместо этой строки сюда писать запрос - ответ на задачу 4
 
+SELECT contactFirstName, contactLastName, country, orderdetails.orderNumber, orderDate, status, SUM(quantityordered * priceEach) AS total
+FROM orders
+INNER JOIN orderdetails
+ON orders.orderNumber = orderdetails.orderNumber
+INNER JOIN customers
+ON customers.customerNumber = orders.customerNumber
+GROUP BY orderNumber
+HAVING total > 59000
 
 Задача 5
-#Вместо этой строки сюда писать запрос - ответ на задачу 5
 
+SELECT productName, SUM(quantityordered * priceEach) AS pricetotal
+FROM 'orderdetails'
+INNER JOIN 'products'
+ON products.productCode = oderdetails.productCode
+GROUP BY productName
+ORDER BY pricetotal DESC
+LIMIT 10
 
 Задача 6
 #Вместо этой строки сюда писать запрос - ответ на задачу 6
